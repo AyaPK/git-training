@@ -5,8 +5,7 @@ fun computeFibbonaciNumber(position: Int?, recursion: Boolean = false): Int {
 
     if (position == 0) return 0
     if (position < 0) {
-        val positionIsOdd = position % 2 == -1
-        return if (positionIsOdd) computeFibbonaciNumber(-position) else (computeFibbonaciNumber(-position) * -1)
+        return computeNegativeFibbonachi(position)
     }
     var notNullPosition = position
     if (notNullPosition == null) {
@@ -51,4 +50,11 @@ fun recursiveFibbonachi(initialPosition: Int, left: Int = 0, right: Int = 1, pos
     } else {
         return recursiveFibbonachi(initialPosition, right - left, left, position + 1)
     }
+}
+
+fun computeNegativeFibbonachi(position:Int): Int {
+    if (position >= 0) throw Exception("potition must be smaller than zero!")
+    val resultIsNegative = position % 2 == 0
+    val absoluteResult = computeFibbonaciNumber(-position)
+    return if (resultIsNegative) (absoluteResult * -1) else absoluteResult
 }
